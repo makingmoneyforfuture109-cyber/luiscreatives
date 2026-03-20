@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Luis Creatives — Websites, Content & AI Tools</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#0C0C0C;--white:#FAFAF8;--blue:#1B4FD8;--blue2:#1340B0;--light-blue:#EEF2FF;--cream:#F5F4F0;--muted:#888;--border:rgba(0,0,0,0.08);--gold:#F5C842;--green:#22C55E;}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--black);overflow-x:hidden}
+
+/* PAGES */
+.page{display:none;}
+.page.active{display:block;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 3rem;background:rgba(250,250,248,0.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Fraunces',serif;font-size:18px;font-weight:700;color:var(--black);text-decoration:none;letter-spacing:-0.5px;cursor:pointer;}
+.nav-logo span{color:var(--blue);}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-size:13px;color:var(--muted);text-decoration:none;transition:color .2s;cursor:pointer;}
+.nav-links a:hover{color:var(--black);}
+.nav-cta{background:var(--blue);color:var(--white);border:none;padding:9px 20px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;border-radius:6px;transition:background .2s;}
+.nav-cta:hover{background:var(--blue2);}
+.nav-tools-btn{background:var(--cream);color:var(--black);border:1px solid var(--border);padding:9px 20px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;border-radius:6px;margin-right:8px;}
+.nav-tools-btn:hover{background:var(--light-blue);border-color:var(--blue);color:var(--blue);}
+
+/* ===================== HOME PAGE ===================== */
+.hero{min-height:100vh;background:var(--black);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 5rem;position:relative;overflow:hidden;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(27,79,216,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(27,79,216,0.05) 1px,transparent 1px);background-size:60px 60px;}
+.hero-glow{position:absolute;top:20%;left:50%;transform:translateX(-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(27,79,216,0.12) 0%,transparent 70%);}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(27,79,216,0.15);border:1px solid rgba(27,79,216,0.3);color:#93B4FF;font-size:12px;font-weight:500;padding:6px 14px;border-radius:20px;margin-bottom:2rem;position:relative;z-index:1;}
+.hero-badge-dot{width:6px;height:6px;background:var(--green);border-radius:50%;}
+.hero-title{font-family:'Fraunces',serif;font-size:clamp(40px,6vw,80px);font-weight:700;color:var(--white);line-height:1.02;letter-spacing:-2.5px;margin-bottom:1.5rem;position:relative;z-index:1;max-width:900px;}
+.hero-title em{font-style:italic;color:#93B4FF;font-weight:300;}
+.hero-sub{font-size:16px;line-height:1.75;color:rgba(255,255,255,0.45);max-width:500px;margin-bottom:2.5rem;font-weight:300;position:relative;z-index:1;}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;margin-bottom:3rem;}
+.btn-blue{background:var(--blue);color:var(--white);border:none;padding:13px 28px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;border-radius:8px;transition:background .2s;}
+.btn-blue:hover{background:var(--blue2);}
+.btn-ghost{background:transparent;color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.15);padding:13px 28px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;border-radius:8px;transition:all .2s;}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.4);color:var(--white);}
+.hero-trust{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;}
+.hero-trust-item{font-size:13px;color:rgba(255,255,255,0.35);}
+.hero-trust-item strong{color:rgba(255,255,255,0.6);font-weight:500;}
+
+.marquee-wrap{background:var(--blue);padding:10px 0;overflow:hidden;}
+.marquee-track{display:flex;white-space:nowrap;animation:marquee 22s linear infinite;}
+.marquee-item{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.7);padding:0 2rem;}
+
+/* TOOLS PREVIEW */
+.tools-preview{padding:6rem 3rem;background:var(--cream);}
+.section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:0.75rem;font-weight:500;}
+.section-title{font-family:'Fraunces',serif;font-size:clamp(28px,3.5vw,44px);font-weight:700;color:var(--black);line-height:1.1;letter-spacing:-1px;margin-bottom:0.5rem;}
+.section-title em{font-style:italic;font-weight:300;}
+.section-sub{font-size:14px;color:var(--muted);margin-bottom:3rem;font-weight:300;}
+.tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:rgba(0,0,0,0.06);}
+.tool-card{background:var(--cream);padding:2.25rem 2rem;transition:background .25s;cursor:pointer;}
+.tool-card:hover{background:var(--white);}
+.tool-card.featured{background:var(--blue);}
+.tool-card.featured:hover{background:var(--blue2);}
+.tool-num{font-size:11px;letter-spacing:2px;color:rgba(0,0,0,0.2);margin-bottom:1rem;}
+.tool-card.featured .tool-num{color:rgba(255,255,255,0.3);}
+.tool-icon{font-size:26px;margin-bottom:1rem;}
+.tool-name{font-family:'Fraunces',serif;font-size:19px;font-weight:700;color:var(--black);margin-bottom:0.5rem;}
+.tool-card.featured .tool-name{color:var(--white);}
+.tool-desc{font-size:13px;line-height:1.7;color:var(--muted);margin-bottom:1.25rem;font-weight:300;}
+.tool-card.featured .tool-desc{color:rgba(255,255,255,0.55);}
+.tool-tag{font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;display:inline-block;}
+.tool-tag-blue{background:var(--light-blue);color:var(--blue);}
+.tool-tag-white{background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8);}
+.tool-tag-green{background:#DCFCE7;color:#166534;}
+.try-btn{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:12px;font-weight:500;color:var(--blue);cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif;padding:0;}
+.tool-card.featured .try-btn{color:rgba(255,255,255,0.7);}
+
+/* PRICING */
+.pricing{padding:6rem 3rem;background:var(--white);}
+.billing-toggle{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:3rem;}
+.toggle-label{font-size:14px;color:var(--muted);transition:color .2s;}
+.toggle-label.active{font-weight:500;color:var(--black);}
+.toggle-wrap{width:48px;height:26px;background:var(--black);border-radius:13px;cursor:pointer;position:relative;}
+.toggle-knob{width:20px;height:20px;background:var(--gold);border-radius:50%;position:absolute;top:3px;left:3px;transition:left .2s;}
+.save-pill{background:#DCFCE7;color:#166534;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;}
+.pricing-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.5px;background:rgba(0,0,0,0.06);}
+.pc{background:var(--white);padding:1.75rem 1.5rem;display:flex;flex-direction:column;}
+.pc.best{background:var(--black);}
+.pc-tier{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;}
+.pc.best .pc-tier{color:rgba(255,255,255,0.3);}
+.pc-name{font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:var(--black);margin-bottom:0.25rem;}
+.pc.best .pc-name{color:var(--white);}
+.pc-tag{font-size:12px;color:var(--muted);margin-bottom:1rem;font-weight:300;}
+.pc.best .pc-tag{color:rgba(255,255,255,0.3);}
+.pc-amount{font-family:'Fraunces',serif;font-size:38px;font-weight:700;color:var(--black);line-height:1;letter-spacing:-1.5px;}
+.pc.best .pc-amount{color:var(--gold);}
+.pc-per{font-size:12px;color:var(--muted);margin-bottom:4px;}
+.pc.best .pc-per{color:rgba(255,255,255,0.3);}
+.pc-savings{font-size:11px;font-weight:500;color:#166534;background:#DCFCE7;padding:2px 8px;border-radius:10px;display:none;margin-bottom:4px;width:fit-content;}
+.pc.best .pc-savings{background:rgba(245,200,66,0.2);color:var(--gold);}
+.pc-divider{height:1px;background:var(--border);margin:1rem 0;}
+.pc.best .pc-divider{background:rgba(255,255,255,0.08);}
+.pc-features{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:1.5rem;flex:1;}
+.pf{font-size:12px;color:var(--muted);display:flex;gap:7px;align-items:flex-start;line-height:1.5;}
+.pc.best .pf{color:rgba(255,255,255,0.5);}
+.pf::before{content:'✓';color:var(--blue);font-weight:600;flex-shrink:0;font-size:11px;}
+.pc.best .pf::before{color:var(--gold);}
+.pf.no{opacity:0.3;}
+.pf.no::before{content:'–';color:var(--muted);}
+.pc-btn{width:100%;padding:11px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;border-radius:6px;margin-top:auto;text-decoration:none;display:block;text-align:center;transition:all .2s;}
+.pc-btn-outline{background:transparent;color:var(--black);border:1.5px solid rgba(0,0,0,0.12);}
+.pc-btn-outline:hover{border-color:var(--blue);color:var(--blue);}
+.pc-btn-gold{background:var(--gold);color:var(--black);}
+.pc-btn-gold:hover{background:#D4A820;}
+.pc-btn-solid{background:var(--blue);color:var(--white);}
+.pc-btn-solid:hover{background:var(--blue2);}
+
+/* CONTACT */
+.contact{padding:6rem 3rem;background:var(--black);}
+.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;max-width:1000px;margin:0 auto;}
+.contact-title{font-family:'Fraunces',serif;font-size:clamp(28px,4vw,44px);font-weight:700;color:var(--white);line-height:1.1;margin-bottom:1rem;letter-spacing:-1px;}
+.contact-title em{font-style:italic;color:#93B4FF;font-weight:300;}
+.contact-desc{font-size:14px;color:rgba(255,255,255,0.45);line-height:1.8;font-weight:300;margin-bottom:1.5rem;}
+.contact-info-item{display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,255,255,0.45);margin-bottom:10px;}
+.contact-info-item strong{color:var(--white);font-weight:500;}
+.form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:1rem;}
+.form-row2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:0;}
+.form-label{font-size:11px;font-weight:500;color:rgba(255,255,255,0.35);letter-spacing:0.5px;text-transform:uppercase;}
+.form-input{padding:11px 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;border-radius:8px;outline:none;transition:border .2s;}
+.form-input::placeholder{color:rgba(255,255,255,0.2);}
+.form-input:focus{border-color:var(--blue);}
+.form-select{padding:11px 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;border-radius:8px;outline:none;cursor:pointer;}
+.form-select option{background:#1a1a1a;}
+.form-textarea{padding:11px 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;border-radius:8px;outline:none;resize:vertical;min-height:90px;transition:border .2s;}
+.form-textarea::placeholder{color:rgba(255,255,255,0.2);}
+.form-textarea:focus{border-color:var(--blue);}
+.form-submit{width:100%;background:var(--blue);color:var(--white);border:none;padding:13px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:background .2s;margin-top:0.5rem;}
+.form-submit:hover{background:var(--blue2);}
+.form-note{font-size:12px;color:rgba(255,255,255,0.2);text-align:center;margin-top:8px;}
+.success-msg{display:none;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:8px;padding:1rem;text-align:center;font-size:14px;color:var(--green);margin-top:1rem;}
+
+footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.05);padding:2rem 3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.footer-logo{font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--white);}
+.footer-logo span{color:#93B4FF;}
+.footer-links{display:flex;gap:1.5rem;list-style:none;}
+.footer-links a{font-size:12px;color:rgba(255,255,255,0.3);text-decoration:none;cursor:pointer;}
+.footer-links a:hover{color:var(--white);}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.2);}
+
+/* ===================== TOOLS DASHBOARD ===================== */
+.tools-page{padding-top:72px;min-height:100vh;background:var(--cream);}
+.tools-hero{background:var(--black);padding:3rem 3rem 2.5rem;text-align:center;}
+.tools-hero-title{font-family:'Fraunces',serif;font-size:clamp(28px,4vw,44px);font-weight:700;color:var(--white);letter-spacing:-1px;margin-bottom:0.5rem;}
+.tools-hero-title em{font-style:italic;color:#93B4FF;font-weight:300;}
+.tools-hero-sub{font-size:14px;color:rgba(255,255,255,0.4);font-weight:300;}
+.credits-bar{background:var(--white);border-bottom:1px solid var(--border);padding:12px 3rem;display:flex;align-items:center;justify-content:space-between;}
+.credits-left{font-size:13px;color:var(--muted);}
+.credits-count{font-weight:500;color:var(--black);}
+.upgrade-pill{font-size:11px;background:var(--black);color:var(--gold);padding:5px 14px;border-radius:20px;font-weight:500;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;}
+
+.tools-nav{display:flex;gap:0;border-bottom:1px solid var(--border);background:var(--white);overflow-x:auto;padding:0 3rem;}
+.tool-tab{padding:14px 20px;font-size:13px;font-weight:400;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;background:transparent;border-top:none;border-left:none;border-right:none;font-family:'DM Sans',sans-serif;}
+.tool-tab:hover{color:var(--black);}
+.tool-tab.active{color:var(--blue);border-bottom-color:var(--blue);font-weight:500;}
+
+.tool-panel{display:none;padding:2.5rem 3rem;max-width:800px;margin:0 auto;}
+.tool-panel.active{display:block;}
+
+/* SHARED TOOL STYLES */
+.tool-card-wrap{background:var(--white);border-radius:12px;border:1px solid var(--border);overflow:hidden;margin-bottom:1.5rem;}
+.tool-card-header{padding:1rem 1.5rem;background:var(--cream);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+.tool-card-icon2{font-size:18px;}
+.tool-card-title2{font-size:15px;font-weight:500;color:var(--black);}
+.tool-card-body{padding:1.5rem;}
+.tf-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+.tf-group{display:flex;flex-direction:column;gap:5px;}
+.tf-group.full{grid-column:1/-1;}
+.tf-label{font-size:11px;font-weight:500;color:var(--muted);letter-spacing:0.5px;text-transform:uppercase;}
+.tf-input{padding:10px 13px;border:1px solid var(--border);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--black);outline:none;transition:border .2s;background:var(--white);}
+.tf-input:focus{border-color:var(--blue);}
+.tf-select{padding:10px 13px;border:1px solid var(--border);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--black);outline:none;cursor:pointer;background:var(--white);}
+.tf-textarea{padding:10px 13px;border:1px solid var(--border);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--black);outline:none;resize:vertical;min-height:80px;transition:border .2s;background:var(--white);}
+.tf-textarea:focus{border-color:var(--blue);}
+.tone-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem;}
+.tone-chip{padding:7px 14px;border:1.5px solid var(--border);border-radius:20px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--muted);cursor:pointer;transition:all .2s;}
+.tone-chip:hover{border-color:var(--blue);color:var(--blue);}
+.tone-chip.active{border-color:var(--blue);background:var(--light-blue);color:var(--blue);font-weight:500;}
+.gen-btn{width:100%;background:var(--blue);color:#fff;border:none;padding:13px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:background .2s;}
+.gen-btn:hover{background:var(--blue2);}
+.gen-btn:disabled{opacity:0.45;cursor:not-allowed;}
+.loading-row{display:none;align-items:center;gap:8px;padding:0.75rem 0;font-size:13px;color:var(--muted);}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--blue);animation:pulse 1.2s ease infinite;}
+.dot:nth-child(2){animation-delay:.2s}
+.dot:nth-child(3){animation-delay:.4s}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+.result-wrap{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.result-top{display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1.25rem;background:var(--cream);border-bottom:1px solid var(--border);}
+.result-lbl{font-size:11px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;}
+.copy-btn2{font-size:11px;border:1px solid var(--border);background:var(--white);border-radius:6px;padding:4px 12px;cursor:pointer;color:var(--muted);font-family:'DM Sans',sans-serif;}
+.copy-btn2:hover{border-color:var(--blue);color:var(--blue);}
+.result-content{padding:1.25rem;font-size:14px;line-height:1.85;color:var(--black);white-space:pre-wrap;}
+.result-tabs2{display:flex;border-bottom:1px solid var(--border);}
+.rtab{padding:9px 18px;font-size:13px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;background:transparent;border-top:none;border-left:none;border-right:none;font-family:'DM Sans',sans-serif;}
+.rtab.active{color:var(--blue);border-bottom-color:var(--blue);font-weight:500;}
+.subj-box{padding:0.9rem 1.25rem;border-bottom:1px solid var(--border);}
+.subj-lbl{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:3px;}
+.subj-val{font-size:14px;font-weight:500;color:var(--black);}
+
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem;}.nav-links{display:none;}
+  .tools-preview{padding:4rem 1.5rem;}.tools-grid{grid-template-columns:1fr;}
+  .pricing{padding:4rem 1.5rem;}.pricing-grid{grid-template-columns:1fr 1fr;}
+  .contact{padding:4rem 1.5rem;}.contact-inner{grid-template-columns:1fr;}
+  footer{padding:1.5rem;flex-direction:column;align-items:flex-start;}
+  .tools-page .credits-bar{padding:10px 1.5rem;}
+  .tools-nav{padding:0 1rem;}
+  .tool-panel{padding:1.5rem 1.5rem;}
+  .tf-row{grid-template-columns:1fr;}
+}
+@media(max-width:500px){.pricing-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">Luis<span>Creatives</span></div>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home');scrollToSection('tools-preview')">Tools</a></li>
+    <li><a onclick="showPage('home');scrollToSection('pricing')">Pricing</a></li>
+    <li><a onclick="showPage('home');scrollToSection('contact')">Contact</a></li>
+  </ul>
+  <div style="display:flex;gap:8px;">
+    <button class="nav-tools-btn" onclick="showPage('tools')">⚡ Open Tools</button>
+    <button class="nav-cta" onclick="showPage('home');scrollToSection('contact')">Free sample</button>
+  </div>
+</nav>
+
+<!-- ==================== HOME PAGE ==================== -->
+<div class="page active" id="page-home">
+
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-badge"><div class="hero-badge-dot"></div> Taking new clients — free sample included</div>
+  <h1 class="hero-title">The fastest way to grow<br>your business <em>online.</em></h1>
+  <p class="hero-sub">Custom websites, monthly content, AI tools, and maintenance — all delivered in 48 hours. Starting free.</p>
+  <div class="hero-btns">
+    <button class="btn-blue" onclick="showPage('tools')">⚡ Try the free tools</button>
+    <button class="btn-ghost" onclick="scrollToSection('pricing')">See plans — from $49</button>
+  </div>
+  <div class="hero-trust">
+    <div class="hero-trust-item">⚡ <strong>48hr delivery</strong></div>
+    <div class="hero-trust-item">🎯 <strong>Free sample — no commitment</strong></div>
+    <div class="hero-trust-item">🔓 <strong>No contracts ever</strong></div>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Website Design ·</span><span class="marquee-item">Email Writer ·</span><span class="marquee-item">Caption Generator ·</span><span class="marquee-item">ReviewBoost AI ·</span><span class="marquee-item">Booking Reminders ·</span><span class="marquee-item">48hr Delivery ·</span><span class="marquee-item">Free Sample ·</span>
+    <span class="marquee-item">Website Design ·</span><span class="marquee-item">Email Writer ·</span><span class="marquee-item">Caption Generator ·</span><span class="marquee-item">ReviewBoost AI ·</span><span class="marquee-item">Booking Reminders ·</span><span class="marquee-item">48hr Delivery ·</span><span class="marquee-item">Free Sample ·</span>
+  </div>
+</div>
+
+<section class="tools-preview" id="tools-preview">
+  <p class="section-label">AI Tools included</p>
+  <h2 class="section-title">5 tools that save your<br>business <em>hours every week</em></h2>
+  <p class="section-sub">All tools are AI-powered and work for any type of local business. Try them free — no signup needed.</p>
+  <div class="tools-grid">
+    <div class="tool-card" onclick="showPage('tools');setTool('review')">
+      <div class="tool-num">01</div><div class="tool-icon">⭐</div>
+      <div class="tool-name">ReviewBoost AI</div>
+      <div class="tool-desc">Generate personalized Google review requests in seconds. More reviews means higher ranking and more new customers finding you.</div>
+      <span class="tool-tag tool-tag-blue">All plans</span>
+      <button class="try-btn" onclick="event.stopPropagation();showPage('tools');setTool('review')">Try it free →</button>
+    </div>
+    <div class="tool-card" onclick="showPage('tools');setTool('email')">
+      <div class="tool-num">02</div><div class="tool-icon">✉️</div>
+      <div class="tool-name">AI Email Writer</div>
+      <div class="tool-desc">Write professional business emails in seconds. Follow-ups, promos, reminders, thank-yous — just describe what you need and it's done.</div>
+      <span class="tool-tag tool-tag-blue">Growth & above</span>
+      <button class="try-btn" onclick="event.stopPropagation();showPage('tools');setTool('email')">Try it free →</button>
+    </div>
+    <div class="tool-card" onclick="showPage('tools');setTool('caption')">
+      <div class="tool-num">03</div><div class="tool-icon">📲</div>
+      <div class="tool-name">Caption Generator</div>
+      <div class="tool-desc">Generate 30 days of social media captions, Reel hooks, and story ideas in one click. Never think about what to post again.</div>
+      <span class="tool-tag tool-tag-green">Growth & above</span>
+      <button class="try-btn" onclick="event.stopPropagation();showPage('tools');setTool('caption')">Try it free →</button>
+    </div>
+    <div class="tool-card" onclick="showPage('tools');setTool('booking')">
+      <div class="tool-num">04</div><div class="tool-icon">📅</div>
+      <div class="tool-name">Booking Reminder</div>
+      <div class="tool-desc">Generate friendly appointment reminder messages for your customers. Reduce no-shows and keep your schedule full automatically.</div>
+      <span class="tool-tag tool-tag-blue">Pro & above</span>
+      <button class="try-btn" onclick="event.stopPropagation();showPage('tools');setTool('booking')">Try it free →</button>
+    </div>
+    <div class="tool-card" onclick="showPage('tools');setTool('bio')">
+      <div class="tool-num">05</div><div class="tool-icon">📝</div>
+      <div class="tool-name">Business Bio Writer</div>
+      <div class="tool-desc">Write a compelling business description for your website, Google profile, Instagram bio, and more — all at once.</div>
+      <span class="tool-tag tool-tag-green">All plans</span>
+      <button class="try-btn" onclick="event.stopPropagation();showPage('tools');setTool('bio')">Try it free →</button>
+    </div>
+    <div class="tool-card" style="background:var(--black);cursor:default;">
+      <div style="font-family:'Fraunces',serif;font-size:40px;font-weight:700;color:#fff;line-height:1;margin-bottom:0.5rem;">Free<br>sample.</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:1.5rem;line-height:1.6;">See what I can build for your business before you spend a dollar.</div>
+      <button class="btn-blue" style="font-size:13px;" onclick="scrollToSection('contact')">Request yours →</button>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <p class="section-label" style="text-align:center;">Pricing</p>
+  <h2 class="section-title" style="text-align:center;margin-bottom:0.5rem;">Start free. <em>Upgrade anytime.</em></h2>
+  <p style="text-align:center;font-size:14px;color:var(--muted);margin-bottom:2.5rem;font-weight:300;">No contracts · Cancel anytime</p>
+  <div class="pricing-grid">
+    <div class="pc">
+      <div class="pc-tier">Free forever</div><div class="pc-name">Free</div><div class="pc-tag">Try before you buy</div>
+      <div class="pc-amount">$0</div><div class="pc-per">no credit card needed</div>
+      <div class="pc-divider"></div>
+      <ul class="pc-features">
+        <li class="pf">ReviewBoost AI (5/mo)</li><li class="pf">Business Bio Writer</li><li class="pf">1 free sample website</li>
+        <li class="pf no">Email Writer</li><li class="pf no">Caption Generator</li><li class="pf no">Maintenance</li>
+      </ul>
+      <button class="pc-btn pc-btn-outline" onclick="showPage('tools')">Try free tools</button>
+    </div>
+    <div class="pc">
+      <div class="pc-tier">Tier 1</div><div class="pc-name">Starter</div><div class="pc-tag">Get online fast</div>
+      <div class="pc-amount" id="p1">$49</div><div class="pc-per" id="pp1">per month</div>
+      <div class="pc-divider"></div>
+      <ul class="pc-features">
+        <li class="pf">1-page website</li><li class="pf">ReviewBoost AI unlimited</li><li class="pf">Business Bio Writer</li><li class="pf">Hosting included</li>
+        <li class="pf no">Email Writer</li><li class="pf no">Caption Generator</li>
+      </ul>
+      <a href="https://buy.stripe.com/7sY28kduRgnxeQ1e6v3Ru00" class="pc-btn pc-btn-outline" id="b1">Get Starter</a>
+    </div>
+    <div class="pc">
+      <div class="pc-tier">Tier 2</div><div class="pc-name">Growth</div><div class="pc-tag">Content + reviews</div>
+      <div class="pc-amount" id="p2">$149</div><div class="pc-per" id="pp2">per month</div>
+      <div class="pc-divider"></div>
+      <ul class="pc-features">
+        <li class="pf">3-page website</li><li class="pf">ReviewBoost AI unlimited</li><li class="pf">AI Email Writer</li><li class="pf">Caption Generator</li><li class="pf">Monthly content pack</li>
+        <li class="pf no">Maintenance</li>
+      </ul>
+      <a href="https://buy.stripe.com/14AfZa9eB5IT37j2nN3Ru01" class="pc-btn pc-btn-outline" id="b2">Get Growth</a>
+    </div>
+    <div class="pc best">
+      <div class="pc-tier">Most popular</div><div class="pc-name">Pro</div><div class="pc-tag">Full management</div>
+      <div class="pc-amount" id="p3">$299</div><div class="pc-per" id="pp3">per month</div>
+      <div class="pc-divider"></div>
+      <ul class="pc-features">
+        <li class="pf">5-page website</li><li class="pf">All 5 AI tools unlimited</li><li class="pf">Monthly content pack</li><li class="pf">Unlimited maintenance</li><li class="pf">Booking Reminder tool</li><li class="pf">24hr turnaround</li>
+      </ul>
+      <a href="https://buy.stripe.com/00w00cfCZgnxgY9bYn3Ru02" class="pc-btn pc-btn-gold" id="b3">Get Pro</a>
+    </div>
+    <div class="pc">
+      <div class="pc-tier">Tier 4</div><div class="pc-name">Agency</div><div class="pc-tag">Everything unlimited</div>
+      <div class="pc-amount" id="p4">$599</div><div class="pc-per" id="pp4">per month</div>
+      <div class="pc-divider"></div>
+      <ul class="pc-features">
+        <li class="pf">Up to 10 websites</li><li class="pf">All 5 AI tools unlimited</li><li class="pf">Content for all clients</li><li class="pf">All sites maintained</li><li class="pf">White-label branding</li><li class="pf">Dedicated support</li>
+      </ul>
+      <a href="https://buy.stripe.com/3cIcMY62pb3dgY95zZ3Ru03" class="pc-btn pc-btn-solid" id="b4">Get Agency</a>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div>
+      <p class="section-label" style="color:rgba(255,255,255,0.4);">Get in touch</p>
+      <h2 class="contact-title">Ready to grow<br>your business <em>online?</em></h2>
+      <p class="contact-desc">Fill out the form and I'll send you a free sample built for your specific business within 24 hours. No commitment, no credit card, no catch.</p>
+      <div class="contact-info-item">📩 <strong>luiskgodinez109@gmail.com</strong></div>
+      <div class="contact-info-item">📱 <strong>@luiscreatives on Instagram</strong></div>
+      <div class="contact-info-item">⚡ <strong>Response within 24 hours</strong></div>
+    </div>
+    <div>
+      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleSubmit(event)">
+        <input type="hidden" name="form-name" value="contact"/>
+        <p style="display:none;"><input name="bot-field"/></p>
+        <div class="form-row2" style="margin-bottom:1rem;">
+          <div class="form-group"><label class="form-label">Your name</label><input class="form-input" type="text" name="name" placeholder="John Smith" required/></div>
+          <div class="form-group"><label class="form-label">Business name</label><input class="form-input" type="text" name="business" placeholder="Smith's Barbershop" required/></div>
+        </div>
+        <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" name="email" placeholder="you@email.com" required/></div>
+        <div class="form-group" style="margin-top:1rem;"><label class="form-label">What do you need?</label>
+          <select class="form-select" name="service">
+            <option>Custom website</option><option>Social media content</option><option>AI tools access</option><option>Full growth package</option><option>Not sure — send me a sample</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin-top:1rem;"><label class="form-label">Anything else?</label><textarea class="form-textarea" name="message" placeholder="Tell me about your business..."></textarea></div>
+        <button type="submit" class="form-submit" style="margin-top:1rem;">Send message — get free sample</button>
+        <p class="form-note">I'll respond within 24 hours with your free sample</p>
+        <div class="success-msg" id="successMsg">✅ Message sent! I'll send your free sample within 24 hours.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Luis<span>Creatives</span></div>
+  <ul class="footer-links">
+    <li><a onclick="scrollToSection('tools-preview')">Tools</a></li>
+    <li><a onclick="scrollToSection('pricing')">Pricing</a></li>
+    <li><a onclick="scrollToSection('contact')">Contact</a></li>
+    <li><a onclick="showPage('tools')">Open Tools</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 LuisCreatives · luiskgodinez109@gmail.com</p>
+</footer>
+</div>
+
+<!-- ==================== TOOLS PAGE ==================== -->
+<div class="page" id="page-tools">
+<div class="tools-page">
+  <div class="tools-hero">
+    <h1 class="tools-hero-title">AI Tools Dashboard — <em>Luis Creatives</em></h1>
+    <p class="tools-hero-sub">5 AI-powered tools to grow your business. Free credits included.</p>
+  </div>
+  <div class="credits-bar">
+    <span class="credits-left">Free credits remaining: <span class="credits-count" id="creditCount">20</span></span>
+    <button class="upgrade-pill" onclick="showPage('home');scrollToSection('pricing')">Upgrade for unlimited access</button>
+  </div>
+  <div class="tools-nav">
+    <button class="tool-tab active" id="tab-review" onclick="setTool('review')">⭐ ReviewBoost AI</button>
+    <button class="tool-tab" id="tab-email" onclick="setTool('email')">✉️ Email Writer</button>
+    <button class="tool-tab" id="tab-caption" onclick="setTool('caption')">📲 Caption Generator</button>
+    <button class="tool-tab" id="tab-booking" onclick="setTool('booking')">📅 Booking Reminder</button>
+    <button class="tool-tab" id="tab-bio" onclick="setTool('bio')">📝 Bio Writer</button>
+  </div>
+
+  <!-- TOOL 1: REVIEWBOOST -->
+  <div class="tool-panel active" id="panel-review">
+    <div class="tool-card-wrap">
+      <div class="tool-card-header"><span class="tool-card-icon2">⭐</span><span class="tool-card-title2">ReviewBoost AI — Google Review Request Generator</span></div>
+      <div class="tool-card-body">
+        <div class="tf-row">
+          <div class="tf-group"><label class="tf-label">Business name</label><input class="tf-input" id="r-biz" placeholder="e.g. Smith's Barbershop"/></div>
+          <div class="tf-group"><label class="tf-label">Customer name</label><input class="tf-input" id="r-cust" placeholder="e.g. Marcus"/></div>
+        </div>
+        <div class="tf-row">
+          <div class="tf-group"><label class="tf-label">Service received</label><input class="tf-input" id="r-svc" placeholder="e.g. haircut, manicure, oil change"/></div>
+          <div class="tf-group"><label class="tf-label">Tone</label>
+            <select class="tf-select" id="r-tone"><option>Friendly and casual</option><option>Professional</option><option>Short and direct</option><option>Warm and personal</option></select>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
+          <label class="tf-label" style="margin:0;">Include emojis?</label>
+          <div style="display:flex;gap:6px;">
+            <button class="tone-chip active" onclick="setChip(this,'r-emoji','Yes include emojis')">Yes 😊</button>
+            <button class="tone-chip" onclick="setChip(this,'r-emoji','No emojis please')">No emojis</button>
+          </div>
+          <input type="hidden" id="r-emoji" value="Yes include emojis"/>
+        </div>
+        <button class="gen-btn" id="r-btn" onclick="runReview()">⭐ Generate review request</button>
+        <div class="loading-row" id="r-load"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span>Writing your messages...</span></div>
+      </div>
+    </div>
+    <div id="r-result" style="display:none;">
+      <div class="result-wrap">
+        <div class="result-tabs2"><button class="rtab active" onclick="switchRTab('r1',this)">Text message</button><button class="rtab" onclick="switchRTab('r2',this)">Email version</button></div>
+        <div id="r1"><div class="result-top"><span class="result-lbl">SMS / Text message</span><button class="copy-btn2" onclick="copyR('r1c')">Copy</button></div><div class="result-content" id="r1c"></div></div>
+        <div id="r2" style="display:none;"><div class="result-top"><span class="result-lbl">Email version</span><button class="copy-btn2" onclick="copyR('r2c')">Copy</button></div><div class="result-content" id="r2c"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOL 2: EMAIL WRITER -->
+  <div class="tool-panel" id="panel-email">
+    <div class="tool-card-wrap">
+      <div class="tool-card-header"><span class="tool-card-icon2">✉️</span><span class="tool-card-title2">AI Email Writer — Professional Emails in Seconds</span></div>
+      <div class="tool-card-body">
+        <div class="tf-row">
+          <div class="tf-group"><label class="tf-label">Business name</label><input class="tf-input" id="e-biz" placeholder="e.g. Smith's Barbershop"/></div>
+          <div class="tf-group"><label class="tf-label">Recipient</label><input class="tf-input" id="e-recip" placeholder="e.g. John or Customer"/></div>
+        </div>
+        <div class="tf-row">
+          <div class="tf-group"><label class="tf-label">Email type</label>
+            <select class="tf-select" id="e-type">
+              <option>Follow up after a meeting</option><option>Thank you to a customer</option><option>Promotional offer or sale</option><option>Appointment reminder</option><option>Request for a Google review</option><option>Welcome new customer</option><option>Apology or service issue</option><option>Re-engage old customer</option><option>Invoice or payment request</option>
+            </select>
+          </div>
+          <div class="tf-group"><label class="tf-label">Length</label>
+            <select class="tf-select" id="e-len"><option>Short (3-4 sentences)</option><option>Medium (1-2 paragraphs)</option><option>Long (full email)</option></select>
+          </div>
+        </div>
+        <div class="tf-group full" style="margin-bottom:1rem;"><label class="tf-label">Key details</label><textarea class="tf-textarea" id="e-details" placeholder="e.g. 20% off this weekend, new location, open Sundays..."></textarea></div>
+        <div style="margin-bottom:1rem;"><label class="tf-label" style="display:block;margin-bottom:6px;">Tone</label>
+          <div class="tone-row">
+            <button class="tone-chip active" onclick="setChip(this,'e-tone','Friendly and warm')">Friendly</button>
+            <button class="tone-chip" onclick="setChip(this,'e-tone','Professional and formal')">Professional</button>
+            <button class="tone-chip" onclick="setChip(this,'e-tone','Casual and conversational')">Casual</button>
+            <button class="tone-chip" onclick="setChip(this,'e-tone','Urgent and direct')">Urgent</button>
+          </div>
+          <input type="hidden" id="e-tone" value="Friendly and warm"/>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
+          <label class="tf-label" style="margin:0;">Include emojis?</label>
+          <div style="display:flex;gap:6px;">
+            <button class="tone-chip" onclick="setChip(this,'e-emoji','Yes add a few relevant emojis')">Yes 😊</button>
+            <button class="tone-chip active" onclick="setChip(this,'e-emoji','No emojis, keep it clean')">No emojis</button>
+          </div>
+          <input type="hidden" id="e-emoji" value="No emojis, keep it clean"/>
+        </div>
+        <button class="gen-btn" id="e-btn" onclick="runEmail()">✉️ Write my email</button>
+        <div class="loading-row" id="e-load"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span>Writing your emails...</span></div>
+      </div>
+    </div>
+    <div id="e-result" style="display:none;">
+      <div class="result-wrap">
+        <div class="result-tabs2"><button class="rtab active" onclick="switchETab('e1',this)">Version 1</button><button class="rtab" onclick="switchETab('e2',this)">Version 2</button></div>
+        <div id="e1"><div class="result-top"><span class="result-lbl">Email — Version 1</span><button class="copy-btn2" onclick="copyFull('e-s1','e-b1')">Copy</button></div><div class="subj-box"><div class="subj-lbl">Subject</div><div class="subj-val" id="e-s1"></div></div><div class="result-content" id="e-b1"></div></div>
+        <div id="e2" style="display:none;"><div class="result-top"><span class="result-lbl">Email — Version 2</span><button class="copy-btn2" onclick="copyFull('e-s2','e-b2')">Copy</button></div><div class="subj-box"><div class="subj-lbl">Subject</div><div class="subj-val" id="e-s2"></div></div><div class="result-content" id="e-b2"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOL 3: CAPTION GENERATOR -->
+  <div class="tool-panel" id="panel-caption">
+    <div class="tool-card-wrap">
+      <div class="tool-card-header"><span class="tool-card-icon2">📲</span><span class="tool-card-title2">Caption Generator — 30 Days of Content in One Click</span></div>
+      <div class="tool-card-body">
+        <div class="tf-row">
+          <div class="tf-group"><label class="tf-label">Business name</label><input class="tf-input" id="c-biz" placeholder="e.g. Smith's Barbershop"/></div>
+          <div class="tf-group"><label class="tf-label">Business type</label>
+            <select class="tf-select" id="c-type">
+              <option>Barbershop / salon</option><option>Nail salon / spa</option><option>Restaurant / cafe</option><option>Gym / fitness studio</option><option>Retail store</option><option>Cleaning service</option><option>Landscaping</option><option>Car detailing</option><option>Other local business</option>
+            </select>
+          </div>
+        </div>
+        <div class="tf-row">
+          <div class="tf-group"><label class="tf-label">How many captions?</label>
+            <select class="tf-select" id="c-num"><option>5 captions</option><option>10 captions</option><option>15 captions</option><option>30 captions (full month)</option></select>
+          </div>
+          <div class="tf-group"><label class="tf-label">Content mix</label>
+            <select class="tf-select" id="c-mix"><option>Mix of all types</option><option>Engagement focused</option><option>Promotional</option><option>Educational / tips</option><option>Brand storytelling</option></select>
+          </div>
+        </div>
+        <div class="tf-group" style="margin-bottom:1rem;"><label class="tf-label">Any promotions or key info to include?</label><textarea class="tf-textarea" id="c-details" placeholder="e.g. summer sale, new service, special hours, team intro..."></textarea></div>
+        <button class="gen-btn" id="c-btn" onclick="runCaption()">📲 Generate captions</button>
+        <div class="loading-row" id="c-load"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span>Writing your captions...</span></div>
+      </div>
+    </div>
+    <div id="c-result" style="display:none;">
+      <div class="result-wrap">
+        <div class="result-top"><span class="result-lbl">Your captions</span><button class="copy-btn2" onclick="copyR('c-content')">Copy all</button></div>
+        <div class="result-content" id="c-content"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOL 4: BOOKING REMINDER -->
+  <div class="tool-panel" id="panel-booking">
+    <div class="tool-card-wrap">
+      <div class="tool-card-header"><span class="tool-card-icon2">📅</span><span class="tool-card-title2">Booking Reminder — Reduce No-Shows Automatically</span></div>
+      <div class="tool-card-body">
+        <div class="tf-row">
+          <div class="tf-group"><label class="tf-label">Business name</label><input class="tf-input" id="b-biz" placeholder="e.g. Smith's Barbershop"/></div>
+          <div class="tf-group"><label class="tf-label">Customer name</label><input class="tf-input" id="b-cust" placeholder="e.g. Marcus"/></div>
+        </div>
+        <div class="tf-row">
+          <div class="tf-group"><label class="tf-label">Appointment date & time</label><input class="tf-input" id="b-date" placeholder="e.g. Friday at 2:00 PM"/></div>
+          <div class="tf-group"><label class="tf-label">Service booked</label><input class="tf-input" id="b-svc" placeholder="e.g. haircut, massage, oil change"/></div>
+        </div>
+        <div class="tf-row">
+          <div class="tf-group"><label class="tf-label">Send reminder</label>
+            <select class="tf-select" id="b-when"><option>24 hours before</option><option>2 hours before</option><option>Same day morning</option><option>3 days before</option></select>
+          </div>
+          <div class="tf-group"><label class="tf-label">Address / location (optional)</label><input class="tf-input" id="b-addr" placeholder="e.g. 123 Main St, Los Angeles"/></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
+          <label class="tf-label" style="margin:0;">Include emojis?</label>
+          <div style="display:flex;gap:6px;">
+            <button class="tone-chip active" onclick="setChip(this,'b-emoji','Yes include a couple friendly emojis')">Yes 😊</button>
+            <button class="tone-chip" onclick="setChip(this,'b-emoji','No emojis, keep it professional')">No emojis</button>
+          </div>
+          <input type="hidden" id="b-emoji" value="Yes include a couple friendly emojis"/>
+        </div>
+        <button class="gen-btn" id="b-btn" onclick="runBooking()">📅 Generate reminder</button>
+        <div class="loading-row" id="b-load"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span>Writing your reminder...</span></div>
+      </div>
+    </div>
+    <div id="b-result" style="display:none;">
+      <div class="result-wrap">
+        <div class="result-tabs2"><button class="rtab active" onclick="switchBTab('b1',this)">Text message</button><button class="rtab" onclick="switchBTab('b2',this)">Email version</button></div>
+        <div id="b1"><div class="result-top"><span class="result-lbl">SMS reminder</span><button class="copy-btn2" onclick="copyR('b1c')">Copy</button></div><div class="result-content" id="b1c"></div></div>
+        <div id="b2" style="display:none;"><div class="result-top"><span class="result-lbl">Email reminder</span><button class="copy-btn2" onclick="copyR('b2c')">Copy</button></div><div class="result-content" id="b2c"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOL 5: BIO WRITER -->
+  <div class="tool-panel" id="panel-bio">
+    <div class="tool-card-wrap">
+      <div class="tool-card-header"><span class="tool-card-icon2">📝</span><span class="tool-card-title2">Business Bio Writer — Describe Your Business Perfectly</span></div>
+      <div class="tool-card-body">
+        <div class="tf-row">
+          <div class="tf-group"><label class="tf-label">Business name</label><input class="tf-input" id="bio-biz" placeholder="e.g. Smith's Barbershop"/></div>
+          <div class="tf-group"><label class="tf-label">Business type</label><input class="tf-input" id="bio-type" placeholder="e.g. barbershop, nail salon, gym"/></div>
+        </div>
+        <div class="tf-row">
+          <div class="tf-group"><label class="tf-label">Location</label><input class="tf-input" id="bio-loc" placeholder="e.g. Tarzana, Los Angeles CA"/></div>
+          <div class="tf-group"><label class="tf-label">Years in business</label><input class="tf-input" id="bio-yrs" placeholder="e.g. 5 years"/></div>
+        </div>
+        <div class="tf-group" style="margin-bottom:1rem;"><label class="tf-label">What makes you special? Key services?</label><textarea class="tf-textarea" id="bio-special" placeholder="e.g. We specialize in precision fades, walk-ins welcome, family owned, certified stylists, 5-star rated..."></textarea></div>
+        <div style="margin-bottom:1rem;"><label class="tf-label" style="display:block;margin-bottom:6px;">Where will this bio be used?</label>
+          <div class="tone-row">
+            <button class="tone-chip active" onclick="setChip(this,'bio-use','Website homepage')">Website</button>
+            <button class="tone-chip" onclick="setChip(this,'bio-use','Google Business profile')">Google</button>
+            <button class="tone-chip" onclick="setChip(this,'bio-use','Instagram bio')">Instagram</button>
+            <button class="tone-chip" onclick="setChip(this,'bio-use','All platforms')">All platforms</button>
+          </div>
+          <input type="hidden" id="bio-use" value="Website homepage"/>
+        </div>
+        <div class="tf-row" style="margin-bottom:1rem;">
+          <div>
+            <label class="tf-label" style="display:block;margin-bottom:6px;">Character limit?</label>
+            <select class="tf-select" id="bio-limit">
+              <option value="0">No limit (website / long form)</option>
+              <option value="150">150 chars — Instagram bio</option>
+              <option value="160">160 chars — Google Business</option>
+              <option value="100">100 chars — Twitter / X bio</option>
+              <option value="200">200 chars — Facebook</option>
+              <option value="300">300 chars — LinkedIn</option>
+              <option value="500">500 chars — Yelp description</option>
+            </select>
+          </div>
+          <div>
+            <label class="tf-label" style="display:block;margin-bottom:6px;">Include emojis?</label>
+            <div style="display:flex;gap:6px;margin-top:2px;">
+              <button class="tone-chip" onclick="setChip(this,'bio-emoji','Yes add a few relevant emojis')">Yes 😊</button>
+              <button class="tone-chip active" onclick="setChip(this,'bio-emoji','No emojis, keep it clean')">No emojis</button>
+            </div>
+            <input type="hidden" id="bio-emoji" value="No emojis, keep it clean"/>
+          </div>
+        </div>
+        <button class="gen-btn" id="bio-btn" onclick="runBio()">📝 Write my bio</button>
+        <div class="loading-row" id="bio-load"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span>Writing your business bio...</span></div>
+      </div>
+    </div>
+    <div id="bio-result" style="display:none;">
+      <div class="result-wrap">
+        <div class="result-tabs2"><button class="rtab active" onclick="switchBioTab('bio1',this)">Version 1</button><button class="rtab" onclick="switchBioTab('bio2',this)">Version 2</button></div>
+        <div id="bio1"><div class="result-top"><span class="result-lbl">Bio — Version 1</span><div style="display:flex;align-items:center;gap:8px;"><span id="bio1-count" style="font-size:11px;color:var(--muted);"></span><button class="copy-btn2" onclick="copyR('bio1c')">Copy</button></div></div><div class="result-content" id="bio1c"></div></div>
+        <div id="bio2" style="display:none;"><div class="result-top"><span class="result-lbl">Bio — Version 2</span><div style="display:flex;align-items:center;gap:8px;"><span id="bio2-count" style="font-size:11px;color:var(--muted);"></span><button class="copy-btn2" onclick="copyR('bio2c')">Copy</button></div></div><div class="result-content" id="bio2c"></div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+var credits=20;
+var yearly=false;
+
+function showPage(p){
+  document.querySelectorAll('.page').forEach(function(el){el.classList.remove('active');});
+  document.getElementById('page-'+p).classList.add('active');
+  window.scrollTo(0,0);
+}
+function scrollToSection(id){
+  setTimeout(function(){
+    var el=document.getElementById(id);
+    if(el)el.scrollIntoView({behavior:'smooth'});
+  },100);
+}
+function setTool(tool){
+  document.querySelectorAll('.tool-tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.tool-panel').forEach(function(p){p.classList.remove('active');});
+  document.getElementById('tab-'+tool).classList.add('active');
+  document.getElementById('panel-'+tool).classList.add('active');
+}
+function setChip(btn,inputId,val){
+  var parent=btn.closest('.tone-row')||btn.parentElement;
+  parent.querySelectorAll('.tone-chip').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  document.getElementById(inputId).value=val;
+}
+function useCredit(){
+  if(credits<=0){alert('No credits left! Upgrade to Pro for unlimited access.');return false;}
+  credits--;
+  document.getElementById('creditCount').textContent=credits;
+  return true;
+}
+function refundCredit(){
+  credits++;
+  document.getElementById('creditCount').textContent=credits;
+}
+var prices={p1:[49,39],p2:[149,119],p3:[299,239],p4:[599,479]};
+var savings={ps1:'Billed $470/yr — save $118',ps2:'Billed $1,430/yr — save $358',ps3:'Billed $2,870/yr — save $718',ps4:'Billed $5,750/yr — save $1,438'};
+function toggleBilling(){
+  yearly=!yearly;
+  document.getElementById('knob').style.left=yearly?'25px':'3px';
+  document.getElementById('lm').classList.toggle('active',!yearly);
+  document.getElementById('ly').classList.toggle('active',yearly);
+  ['1','2','3','4'].forEach(function(n){
+    document.getElementById('p'+n).textContent='$'+prices['p'+n][yearly?1:0];
+    document.getElementById('pp'+n).textContent=yearly?'per month, billed yearly':'per month';
+    var s=document.getElementById('ps'+n);
+    s.style.display=yearly?'block':'none';
+    s.textContent=savings['ps'+n];
+  });
+}
+function handleSubmit(e){
+  e.preventDefault();
+  var form=e.target;
+  fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(form)).toString()})
+  .then(function(){form.style.display='none';document.getElementById('successMsg').style.display='block';})
+  .catch(function(){document.getElementById('successMsg').style.display='block';document.getElementById('successMsg').textContent='Thanks! I will be in touch within 24 hours.';});
+}
+async function callClaude(prompt){
+  var res=await fetch('/.netlify/functions/claude',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({prompt:prompt})
+  });
+  var data=await res.json();
+  return data.content.map(function(i){return i.text||'';}).join('');
+}
+function safeJSON(raw){
+  var s=raw.trim().replace(/```json|```/g,'').trim();
+  var a=s.indexOf('{');
+  var b=s.lastIndexOf('}');
+  if(a===-1||b===-1)throw new Error('No JSON found');
+  return JSON.parse(s.slice(a,b+1));
+}
+function validateInput(val, fieldName){
+  if(!val || val.trim().length < 2){
+    alert('Please fill in the ' + fieldName + ' field.');
+    return false;
+  }
+  return true;
+}
+function setBtn(id,on){document.getElementById(id).disabled=!on;}
+function setLoad(id,on){document.getElementById(id).style.display=on?'flex':'none';}
+function setVis(id,on){document.getElementById(id).style.display=on?'block':'none';}
+
+async function runReview(){
+  if(!useCredit())return;
+  var biz=document.getElementById('r-biz').value.trim()||'the business';
+  var cust=document.getElementById('r-cust').value.trim()||'the customer';
+  var svc=document.getElementById('r-svc').value.trim()||'their recent visit';
+  var tone=document.getElementById('r-tone').value;
+  var emoji=document.getElementById('r-emoji').value;
+  setBtn('r-btn',false);setLoad('r-load',true);setVis('r-result',false);
+  var prompt='Write a Google review request for this business. Business: '+biz+'. Customer: '+cust+'. Service received: '+svc+'. Tone: '+tone+'. Emojis: '+emoji+'. Return ONLY a JSON object with two keys: text (SMS version under 160 chars) and email (2-3 sentence email version). No markdown, no extra text.';
+  try{
+    var raw=await callClaude(prompt);
+    var d=safeJSON(raw);
+    document.getElementById('r1c').textContent=d.text||'';
+    document.getElementById('r2c').textContent=d.email||'';
+    setVis('r-result',true);
+  }catch(e){console.error(e);alert('Something went wrong. Please try again.');refundCredit();}
+  setBtn('r-btn',true);setLoad('r-load',false);
+}
+
+async function runEmail(){
+  if(!useCredit())return;
+  var biz=document.getElementById('e-biz').value.trim()||'the business';
+  var recip=document.getElementById('e-recip').value.trim()||'Customer';
+  var type=document.getElementById('e-type').value;
+  var len=document.getElementById('e-len').value;
+  var details=document.getElementById('e-details').value.trim()||'general';
+  var tone=document.getElementById('e-tone').value;
+  var emoji=document.getElementById('e-emoji').value;
+  setBtn('e-btn',false);setLoad('e-load',true);setVis('e-result',false);
+  var prompt='Write two different business emails. Business: '+biz+'. Recipient: '+recip+'. Type: '+type+'. Tone: '+tone+'. Length: '+len+'. Details: '+details+'. Emojis: '+emoji+'. Return ONLY a JSON object with keys email1 and email2, each having subject and body. No markdown, no extra text.';
+  try{
+    var raw=await callClaude(prompt);
+    var d=safeJSON(raw);
+    document.getElementById('e-s1').textContent=d.email1.subject||'';
+    document.getElementById('e-b1').textContent=d.email1.body||'';
+    document.getElementById('e-s2').textContent=d.email2.subject||'';
+    document.getElementById('e-b2').textContent=d.email2.body||'';
+    setVis('e-result',true);
+  }catch(e){console.error(e);alert('Something went wrong. Please try again.');refundCredit();}
+  setBtn('e-btn',true);setLoad('e-load',false);
+}
+
+async function runCaption(){
+  if(!useCredit())return;
+  var biz=document.getElementById('c-biz').value.trim()||'the business';
+  var type=document.getElementById('c-type').value;
+  var num=document.getElementById('c-num').value;
+  var mix=document.getElementById('c-mix').value;
+  var details=document.getElementById('c-details').value.trim()||'general content';
+  setBtn('c-btn',false);setLoad('c-load',true);setVis('c-result',false);
+  var prompt='Write '+num+' social media captions for a '+type+' business called '+biz+'. Content mix: '+mix+'. Key details: '+details+'. Number each caption and add a type label in brackets like [Engagement] or [Promo]. Make them engaging and varied. Add hashtags only to the very last caption. Return as plain readable text only.';
+  try{
+    var raw=await callClaude(prompt);
+    document.getElementById('c-content').textContent=raw;
+    setVis('c-result',true);
+  }catch(e){console.error(e);alert('Something went wrong. Please try again.');refundCredit();}
+  setBtn('c-btn',true);setLoad('c-load',false);
+}
+
+async function runBooking(){
+  if(!useCredit())return;
+  var biz=document.getElementById('b-biz').value.trim()||'the business';
+  var cust=document.getElementById('b-cust').value.trim()||'the customer';
+  var date=document.getElementById('b-date').value.trim()||'your upcoming appointment';
+  var svc=document.getElementById('b-svc').value.trim()||'your appointment';
+  var when=document.getElementById('b-when').value;
+  var addr=document.getElementById('b-addr').value.trim();
+  var emoji=document.getElementById('b-emoji').value;
+  setBtn('b-btn',false);setLoad('b-load',true);setVis('b-result',false);
+  var prompt='Write appointment reminder messages for a local business. Business: '+biz+'. Customer: '+cust+'. Date and time: '+date+'. Service: '+svc+'. Send timing: '+when+'.'+(addr?' Address: '+addr:'')+' Emojis: '+emoji+'. Return ONLY a JSON object with two keys: sms (under 160 chars) and email (2-3 sentence professional reminder). No markdown, no extra text.';
+  try{
+    var raw=await callClaude(prompt);
+    var d=safeJSON(raw);
+    document.getElementById('b1c').textContent=d.sms||'';
+    document.getElementById('b2c').textContent=d.email||'';
+    setVis('b-result',true);
+  }catch(e){console.error(e);alert('Something went wrong. Please try again.');refundCredit();}
+  setBtn('b-btn',true);setLoad('b-load',false);
+}
+
+async function runBio(){
+  if(!useCredit())return;
+  var biz=document.getElementById('bio-biz').value.trim()||'the business';
+  var type=document.getElementById('bio-type').value.trim()||'local business';
+  var loc=document.getElementById('bio-loc').value.trim();
+  var yrs=document.getElementById('bio-yrs').value.trim();
+  var special=document.getElementById('bio-special').value.trim()||'quality service';
+  var use=document.getElementById('bio-use').value;
+  var limit=document.getElementById('bio-limit').value;
+  var emoji=document.getElementById('bio-emoji').value;
+  setBtn('bio-btn',false);setLoad('bio-load',true);setVis('bio-result',false);
+  var limitText=limit==='0'?'No character limit, write naturally.':(limit+' characters maximum — this is a hard limit, do not exceed it.');
+  var prompt='Write two business bio descriptions. Business: '+biz+'. Type: '+type+'.'+(loc?' Location: '+loc+'.':"")+(yrs?' Years in business: '+yrs+'.':"")+'  What makes them special: '+special+'. Used for: '+use+'. Character limit: '+limitText+' Emojis: '+emoji+'. Return ONLY a JSON object with two keys: bio1 (first version) and bio2 (second version with a different angle). No markdown, no extra text.';
+  try{
+    var raw=await callClaude(prompt);
+    var d=safeJSON(raw);
+    var b1=d.bio1||'';
+    var b2=d.bio2||'';
+    document.getElementById('bio1c').textContent=b1;
+    document.getElementById('bio2c').textContent=b2;
+    var lim=parseInt(limit);
+    if(lim>0){
+      var c1=b1.length;
+      var c2=b2.length;
+      document.getElementById('bio1-count').textContent=c1+' / '+lim+' chars'+(c1>lim?' ⚠️ over limit':'');
+      document.getElementById('bio1-count').style.color=c1>lim?'#E63946':'var(--muted)';
+      document.getElementById('bio2-count').textContent=c2+' / '+lim+' chars'+(c2>lim?' ⚠️ over limit':'');
+      document.getElementById('bio2-count').style.color=c2>lim?'#E63946':'var(--muted)';
+    } else {
+      document.getElementById('bio1-count').textContent=b1.length+' chars';
+      document.getElementById('bio2-count').textContent=b2.length+' chars';
+    }
+    setVis('bio-result',true);
+  }catch(e){console.error(e);alert('Something went wrong. Please try again.');refundCredit();}
+  setBtn('bio-btn',true);setLoad('bio-load',false);
+}
+
+function copyR(id){
+  var t=event.target;
+  navigator.clipboard.writeText(document.getElementById(id).textContent).then(function(){
+    t.textContent='Copied!';setTimeout(function(){t.textContent='Copy';},2000);
+  });
+}
+function copyFull(sid,bid){
+  var t=event.target;
+  var text='Subject: '+document.getElementById(sid).textContent+'\n\n'+document.getElementById(bid).textContent;
+  navigator.clipboard.writeText(text).then(function(){t.textContent='Copied!';setTimeout(function(){t.textContent='Copy';},2000);});
+}
+function switchRTab(id,btn){
+  ['r1','r2'].forEach(function(i){document.getElementById(i).style.display='none';});
+  btn.closest('.result-tabs2').querySelectorAll('.rtab').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');document.getElementById(id).style.display='block';
+}
+function switchETab(id,btn){
+  ['e1','e2'].forEach(function(i){document.getElementById(i).style.display='none';});
+  btn.closest('.result-tabs2').querySelectorAll('.rtab').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');document.getElementById(id).style.display='block';
+}
+function switchBTab(id,btn){
+  ['b1','b2'].forEach(function(i){document.getElementById(i).style.display='none';});
+  btn.closest('.result-tabs2').querySelectorAll('.rtab').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');document.getElementById(id).style.display='block';
+}
+function switchBioTab(id,btn){
+  ['bio1','bio2'].forEach(function(i){document.getElementById(i).style.display='none';});
+  btn.closest('.result-tabs2').querySelectorAll('.rtab').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');document.getElementById(id).style.display='block';
+}
+</script>
+</body>
+</html>
